@@ -3,9 +3,10 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Iterable
+from typing import Any, Dict, Iterable
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -49,6 +50,23 @@ CATEGORY_ALIASES = {
     "dynamic programming": "Dynamic Programming",
 }
 
+CATEGORY_FIELD_NAMES = {
+    "Array": "array",
+    "String": "string",
+    "Tree": "tree",
+    "Hash Table": "hash_table",
+    "Two Pointers": "two_pointers",
+    "Sliding Window": "sliding_window",
+    "BackTracking": "backtracking",
+    "Prefix Sum": "prefix_sum",
+    "Depth-First Search": "depth_first_search",
+    "Binary Search": "binary_search",
+    "Breadth-First Search": "breadth_first_search",
+    "Graph Theory": "graph_theory",
+    "Linked List": "linked_list",
+    "Dynamic Programming": "dynamic_programming",
+}
+
 STATS_QUERY = """
 query userProblemsSolved($username: String!) {
   matchedUser(username: $username) {
@@ -86,6 +104,70 @@ query skillStats($username: String!) {
 """.strip()
 
 
+@dataclass(frozen=True)
+class DifficultyStats:
+    all: int = 0
+    easy: int = 0
+    medium: int = 0
+    hard: int = 0
+
+
+@dataclass(frozen=True)
+class SubmissionStatsUser:
+    username: str
+    difficulty_stats: DifficultyStats
+
+
+@dataclass(frozen=True)
+class SubmissionStatsResponse:
+    matched_user: SubmissionStatsUser | None
+
+
+@dataclass(frozen=True)
+class TagProblemCount:
+    tag_name: str
+    problems_solved: int
+
+
+@dataclass(frozen=True)
+class TagProblemCounts:
+    advanced: list[TagProblemCount]
+    intermediate: list[TagProblemCount]
+    fundamental: list[TagProblemCount]
+
+
+@dataclass(frozen=True)
+class TagStatsUser:
+    tag_problem_counts: TagProblemCounts
+
+
+@dataclass(frozen=True)
+class TagStatsResponse:
+    matched_user: TagStatsUser | None
+
+
+@dataclass
+class CategoryCounts:
+    array: int = 0
+    string: int = 0
+    tree: int = 0
+    hash_table: int = 0
+    two_pointers: int = 0
+    sliding_window: int = 0
+    backtracking: int = 0
+    prefix_sum: int = 0
+    depth_first_search: int = 0
+    binary_search: int = 0
+    breadth_first_search: int = 0
+    graph_theory: int = 0
+    linked_list: int = 0
+    dynamic_programming: int = 0
+
+    def get(self, category: str) -> int:
+        field_name = CATEGORY_FIELD_NAMES[category]
+        return int(getattr(self, field_name))
+
+
 def extract_username(readme_text: str) -> str:
     patterns = [
         r"https://leetcode\.com/u/([A-Za-z0-9_-]+)/?",
@@ -98,7 +180,7 @@ def extract_username(readme_text: str) -> str:
     raise ValueError("Não foi possível encontrar o usuário do LeetCode no README.")
 
 
-def graphql_request(query: str, variables: Dict[str, str], username: str) -> Dict:
+def graphql_request(query: str, variables: Dict[str, str], username: str) -> Dict[str, Any]:
     payload = json.dumps({"query": query, "variables": variables}).encode("utf-8")
     request = Request(
         LEETCODE_GRAPHQL_URL,
@@ -127,30 +209,88 @@ def graphql_request(query: str, variables: Dict[str, str], username: str) -> Dic
     return data["data"]
 
 
-def flatten_tags(tag_groups: Dict[str, Iterable[Dict]]) -> Dict[str, int]:
-    counts: Dict[str, int] = {category: 0 for category in CATEGORY_ORDER}
+def parse_submission_stats(data: Dict[str, Any]) -> SubmissionStatsResponse:
+    matched_user_data = data.get("matchedUser")
+    if not matched_user_data:
+        return SubmissionStatsResponse(matched_user=None)
 
-    for group in ("advanced", "intermediate", "fundamental"):
-        for item in tag_groups.get(group) or []:
-            raw_name = (item.get("tagName") or "").strip().lower()
+    difficulty_counts = {
+        item["difficulty"]: int(item.get("count") or 0)
+        for item in matched_user_data["submitStatsGlobal"]["acSubmissionNum"]
+    }
+
+    return SubmissionStatsResponse(
+        matched_user=SubmissionStatsUser(
+            username=matched_user_data["username"],
+            difficulty_stats=DifficultyStats(
+                all=difficulty_counts.get("All", 0),
+                easy=difficulty_counts.get("Easy", 0),
+                medium=difficulty_counts.get("Medium", 0),
+                hard=difficulty_counts.get("Hard", 0),
+            ),
+        )
+    )
+
+
+def parse_tag_stats(data: Dict[str, Any]) -> TagStatsResponse:
+    matched_user_data = data.get("matchedUser")
+    if not matched_user_data:
+        return TagStatsResponse(matched_user=None)
+
+    tag_problem_counts_data = matched_user_data.get("tagProblemCounts") or {}
+
+    def build_tag_list(items: Iterable[Dict[str, Any]] | None) -> list[TagProblemCount]:
+        return [
+            TagProblemCount(
+                tag_name=item["tagName"],
+                problems_solved=int(item.get("problemsSolved") or 0),
+            )
+            for item in (items or [])
+        ]
+
+    return TagStatsResponse(
+        matched_user=TagStatsUser(
+            tag_problem_counts=TagProblemCounts(
+                advanced=build_tag_list(tag_problem_counts_data.get("advanced")),
+                intermediate=build_tag_list(tag_problem_counts_data.get("intermediate")),
+                fundamental=build_tag_list(tag_problem_counts_data.get("fundamental")),
+            )
+        )
+    )
+
+
+def fetch_submission_stats(username: str) -> SubmissionStatsResponse:
+    data = graphql_request(STATS_QUERY, {"username": username}, username)
+    return parse_submission_stats(data)
+
+
+def fetch_tag_stats(username: str) -> TagStatsResponse:
+    data = graphql_request(TAGS_QUERY, {"username": username}, username)
+    return parse_tag_stats(data)
+
+
+def flatten_tags(tag_groups: TagProblemCounts) -> CategoryCounts:
+    counts = CategoryCounts()
+
+    for group in (tag_groups.advanced, tag_groups.intermediate, tag_groups.fundamental):
+        for item in group:
+            raw_name = item.tag_name.strip().lower()
             normalized_name = CATEGORY_ALIASES.get(raw_name)
             if not normalized_name:
                 continue
-            counts[normalized_name] = int(item.get("problemsSolved") or 0)
+            field_name = CATEGORY_FIELD_NAMES[normalized_name]
+            setattr(counts, field_name, item.problems_solved)
 
     return counts
 
 
-def build_stats_block(username: str, submission_stats: Dict, tag_counts: Dict[str, int]) -> str:
-    stats_by_difficulty = {
-        item["difficulty"]: int(item.get("count") or 0)
-        for item in submission_stats["matchedUser"]["submitStatsGlobal"]["acSubmissionNum"]
-    }
+def build_stats_block(username: str, submission_stats: SubmissionStatsResponse, tag_counts: CategoryCounts) -> str:
+    difficulty_stats = submission_stats.matched_user.difficulty_stats
 
-    total = stats_by_difficulty.get("All", 0)
-    easy = stats_by_difficulty.get("Easy", 0)
-    medium = stats_by_difficulty.get("Medium", 0)
-    hard = stats_by_difficulty.get("Hard", 0)
+    total = difficulty_stats.all
+    easy = difficulty_stats.easy
+    medium = difficulty_stats.medium
+    hard = difficulty_stats.hard
     updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     rows = [
@@ -158,7 +298,7 @@ def build_stats_block(username: str, submission_stats: Dict, tag_counts: Dict[st
         "| --- | ---: |",
     ]
     for category in CATEGORY_ORDER:
-        rows.append(f"| {category} | {tag_counts.get(category, 0)} |")
+        rows.append(f"| {category} | {tag_counts.get(category)} |")
 
     lines = [
         AUTO_START,
@@ -192,17 +332,17 @@ def main() -> None:
     readme_text = README_PATH.read_text(encoding="utf-8")
     username = extract_username(readme_text)
 
-    submission_stats = graphql_request(STATS_QUERY, {"username": username}, username)
-    tag_stats = graphql_request(TAGS_QUERY, {"username": username}, username)
+    submission_stats = fetch_submission_stats(username)
+    tag_stats = fetch_tag_stats(username)
 
-    if not submission_stats.get("matchedUser"):
+    if not submission_stats.matched_user:
         raise RuntimeError(f"Usuário '{username}' não encontrado no LeetCode.")
 
-    matched_user = tag_stats.get("matchedUser")
+    matched_user = tag_stats.matched_user
     if not matched_user:
         raise RuntimeError(f"Usuário '{username}' não encontrado no LeetCode.")
 
-    tag_counts = flatten_tags(matched_user.get("tagProblemCounts") or {})
+    tag_counts = flatten_tags(matched_user.tag_problem_counts)
     new_block = build_stats_block(username, submission_stats, tag_counts)
     updated_readme = replace_auto_block(readme_text, new_block)
     README_PATH.write_text(updated_readme + ("" if updated_readme.endswith("\n") else "\n"), encoding="utf-8")
