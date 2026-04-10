@@ -24,46 +24,50 @@ As categorias que quero praticar neste repositório são:
 2. String
 3. Tree
 4. Hash Table
-5. Two Pointers
-6. Sliding Window
-7. BackTracking
-8. Prefix Sum
-9. Depth-First Search
-10. Binary Search
-11. Breadth-First Search
-12. Graph Theory
-13. Linked List
-14. Dynamic Programming
+5. Sorting
+6. Two Pointers
+7. Sliding Window
+8. BackTracking
+9. Prefix Sum
+10. Depth-First Search
+11. Binary Search
+12. Breadth-First Search
+13. Graph Theory
+14. Linked List
+15. Dynamic Programming
 
 ## Progresso por categoria
 
 <!-- LEETCODE_STATS_START -->
+
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Última atualização: 2026-04-10 20:57 UTC
+- Última atualização: 2026-04-10 21:30 UTC
 
-| Categoria | Quantidade resolvida |
-| --- | ---: |
-| Array | 15 |
-| String | 7 |
-| Tree | 0 |
-| Hash Table | 7 |
-| Two Pointers | 3 |
-| Sliding Window | 0 |
-| BackTracking | 0 |
-| Prefix Sum | 0 |
-| Depth-First Search | 1 |
-| Binary Search | 1 |
-| Breadth-First Search | 1 |
-| Graph Theory | 0 |
-| Linked List | 1 |
-| Dynamic Programming | 1 |
+| Categoria            | Quantidade resolvida |
+| -------------------- | -------------------: |
+| Array                |                   15 |
+| String               |                    7 |
+| Tree                 |                    0 |
+| Hash Table           |                    7 |
+| Sorting              |                    2 |
+| Two Pointers         |                    3 |
+| Sliding Window       |                    0 |
+| BackTracking         |                    0 |
+| Prefix Sum           |                    0 |
+| Depth-First Search   |                    1 |
+| Binary Search        |                    1 |
+| Breadth-First Search |                    1 |
+| Graph Theory         |                    0 |
+| Linked List          |                    1 |
+| Dynamic Programming  |                    1 |
 
 **Total resolvido:** 22 questões  
 **Por dificuldade:** Easy 21 · Medium 1 · Hard 0
 
 > Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
+
 <!-- LEETCODE_STATS_END -->
 
 ## Melhor ordem de estudo para quem está começando
@@ -81,37 +85,40 @@ Considerando que você está no início e começou por `Array`, a melhor estrat�
 3. **Hash Table**  
    Essencial para melhorar complexidade de tempo em problemas de busca, frequência e complemento.
 
-4. **Two Pointers**  
+4. **Sorting**  
+   Muito importante em entrevistas, porque vários problemas ficam mais simples depois de ordenar os dados.
+
+5. **Two Pointers**  
    Excelente depois de `Array` e `String`, porque depende muito de leitura de índice e comparação de extremos.
 
-5. **Linked List**  
+6. **Linked List**  
    Introduz ponteiros de forma mais concreta e ajuda bastante em entrevistas.
 
-6. **Binary Search**  
+7. **Binary Search**  
    Importante para dominar busca eficiente e raciocínio em intervalos.
 
-7. **Prefix Sum**  
+8. **Prefix Sum**  
    Muito útil para consultas rápidas em arrays e preparação para problemas intermediários.
 
-8. **Sliding Window**  
+9. **Sliding Window**  
    Natural depois de `Array`, `String`, `Hash Table` e `Two Pointers`.
 
-9. **Tree**  
-   Aqui você começa a entrar em estruturas não lineares.
+10. **Tree**  
+    Aqui você começa a entrar em estruturas não lineares.
 
-10. **Depth-First Search**  
+11. **Depth-First Search**  
      Normalmente fica mais fácil depois de entender `Tree`.
 
-11. **Breadth-First Search**  
+12. **Breadth-First Search**  
      Ótima sequência após `DFS`, especialmente em árvores e grafos simples.
 
-12. **BackTracking**  
+13. **BackTracking**  
      Exige mais maturidade em recursão e exploração de possibilidades.
 
-13. **Graph Theory**  
+14. **Graph Theory**  
      Fica mais natural depois de `Tree`, `DFS` e `BFS`.
 
-14. **Dynamic Programming**  
+15. **Dynamic Programming**  
      Deixe para depois de ganhar base sólida, porque costuma exigir mais abstração.
 
 ## Roadmap resumido
@@ -121,6 +128,7 @@ Considerando que você está no início e começou por `Array`, a melhor estrat�
 - Array
 - String
 - Hash Table
+- Sorting
 - Two Pointers
 
 ### Fase 2 — Estruturas lineares e busca
@@ -159,6 +167,7 @@ Uma meta realista para o começo pode ser:
 - 20 a 30 questões de `Array`;
 - 15 a 20 de `String`;
 - 15 a 20 de `Hash Table`;
+- 10 a 15 de `Sorting`;
 - 15 de `Two Pointers`;
 - depois seguir para as próximas categorias.
 

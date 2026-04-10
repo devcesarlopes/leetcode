@@ -20,6 +20,7 @@ CATEGORY_ORDER = [
     "String",
     "Tree",
     "Hash Table",
+    "Sorting",
     "Two Pointers",
     "Sliding Window",
     "BackTracking",
@@ -37,6 +38,7 @@ CATEGORY_ALIASES = {
     "string": "String",
     "tree": "Tree",
     "hash table": "Hash Table",
+    "sorting": "Sorting",
     "two pointers": "Two Pointers",
     "sliding window": "Sliding Window",
     "backtracking": "BackTracking",
@@ -55,6 +57,7 @@ CATEGORY_FIELD_NAMES = {
     "String": "string",
     "Tree": "tree",
     "Hash Table": "hash_table",
+    "Sorting": "sorting",
     "Two Pointers": "two_pointers",
     "Sliding Window": "sliding_window",
     "BackTracking": "backtracking",
@@ -152,6 +155,7 @@ class CategoryCounts:
     string: int = 0
     tree: int = 0
     hash_table: int = 0
+    sorting: int = 0
     two_pointers: int = 0
     sliding_window: int = 0
     backtracking: int = 0
