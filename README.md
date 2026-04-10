@@ -41,7 +41,7 @@ As categorias que quero praticar neste repositório são:
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Última atualização: 2026-04-10 20:51 UTC
+- Última atualização: 2026-04-10 20:57 UTC
 
 | Categoria | Quantidade resolvida |
 | --- | ---: |
