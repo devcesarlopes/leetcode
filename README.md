@@ -14,8 +14,6 @@ O foco deste repositório é:
 
 ## Perfil no LeetCode
 
-> Atualize o link abaixo com o seu usuário real.
-
 - Perfil: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
 
 ## Categorias de estudo
@@ -39,30 +37,38 @@ As categorias que quero praticar neste repositório são:
 
 ## Progresso por categoria
 
-Situação atual: comecei pelos exercícios de `Array` e já resolvi 14 questões fáceis.
+<!-- LEETCODE_STATS_START -->
+Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
-| Categoria            | Quantidade resolvida |
-| -------------------- | -------------------: |
-| Array                |                   14 |
-| String               |                    0 |
-| Tree                 |                    0 |
-| Hash Table           |                    0 |
-| Two Pointers         |                    0 |
-| Sliding Window       |                    0 |
-| BackTracking         |                    0 |
-| Prefix Sum           |                    0 |
-| Depth-First Search   |                    0 |
-| Binary Search        |                    0 |
-| Breadth-First Search |                    0 |
-| Graph Theory         |                    0 |
-| Linked List          |                    0 |
-| Dynamic Programming  |                    0 |
+- Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
+- Última atualização: 2026-04-10 20:51 UTC
 
-**Total resolvido:** 14 questões
+| Categoria | Quantidade resolvida |
+| --- | ---: |
+| Array | 15 |
+| String | 7 |
+| Tree | 0 |
+| Hash Table | 7 |
+| Two Pointers | 3 |
+| Sliding Window | 0 |
+| BackTracking | 0 |
+| Prefix Sum | 0 |
+| Depth-First Search | 1 |
+| Binary Search | 1 |
+| Breadth-First Search | 1 |
+| Graph Theory | 0 |
+| Linked List | 1 |
+| Dynamic Programming | 1 |
+
+**Total resolvido:** 22 questões  
+**Por dificuldade:** Easy 21 · Medium 1 · Hard 0
+
+> Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
+<!-- LEETCODE_STATS_END -->
 
 ## Melhor ordem de estudo para quem está começando
 
-Considerando que você está no início e já resolveu 14 questões fáceis de `Array`, a melhor estratégia é avançar do mais fundamental para os padrões que aparecem com mais frequência.
+Considerando que você está no início e começou por `Array`, a melhor estratégia é avançar do mais fundamental para os padrões que aparecem com mais frequência.
 
 ### Ordem sugerida
 
@@ -164,6 +170,15 @@ Este repositório pode ser usado para registrar:
 - observações sobre complexidade de tempo e espaço;
 - padrões aprendidos;
 - revisões por categoria.
+
+## Atualização automática
+
+O repositório agora conta com automação para atualizar esta seção de estatísticas:
+
+- script: `scripts/update_leetcode_stats.py`
+- workflow: `.github/workflows/update-leetcode-stats.yml`
+
+O workflow roda automaticamente todos os dias e também pode ser executado manualmente pelo GitHub Actions.
 
 ---
 
