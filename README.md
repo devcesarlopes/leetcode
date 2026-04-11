@@ -39,35 +39,33 @@ As categorias que quero praticar neste repositório são:
 ## Progresso por categoria
 
 <!-- LEETCODE_STATS_START -->
-
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Última atualização: 2026-04-10 21:30 UTC
+- Última atualização: 2026-04-11 06:17 UTC
 
-| Categoria            | Quantidade resolvida |
-| -------------------- | -------------------: |
-| Array                |                   15 |
-| String               |                    7 |
-| Tree                 |                    0 |
-| Hash Table           |                    7 |
-| Sorting              |                    2 |
-| Two Pointers         |                    3 |
-| Sliding Window       |                    0 |
-| BackTracking         |                    0 |
-| Prefix Sum           |                    0 |
-| Depth-First Search   |                    1 |
-| Binary Search        |                    1 |
-| Breadth-First Search |                    1 |
-| Graph Theory         |                    0 |
-| Linked List          |                    1 |
-| Dynamic Programming  |                    1 |
+| Categoria | Quantidade resolvida |
+| --- | ---: |
+| Array | 15 |
+| String | 7 |
+| Tree | 0 |
+| Hash Table | 7 |
+| Sorting | 2 |
+| Two Pointers | 3 |
+| Sliding Window | 0 |
+| BackTracking | 0 |
+| Prefix Sum | 0 |
+| Depth-First Search | 1 |
+| Binary Search | 1 |
+| Breadth-First Search | 1 |
+| Graph Theory | 0 |
+| Linked List | 1 |
+| Dynamic Programming | 1 |
 
 **Total resolvido:** 22 questões  
 **Por dificuldade:** Easy 21 · Medium 1 · Hard 0
 
 > Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
-
 <!-- LEETCODE_STATS_END -->
 
 ## Melhor ordem de estudo para quem está começando
