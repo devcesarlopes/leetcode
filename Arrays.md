@@ -5,28 +5,22 @@ This page is a practical guide for the most reusable Array-related patterns.
 ## Solved Array Questions (ordered 1 → n)
 
 <!-- ARRAY_QUESTIONS_START -->
-
 This block is auto-updated by `scripts/update_leetcode_stats.py`.
 
 - Profile: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Updated at: 2026-04-13 00:38 UTC
+- Updated at: 2026-04-13 23:08 UTC
 - Source: recent accepted submissions filtered by the `array` tag
 
-|   # | LeetCode ID | Problem                                                                                                           |
-| --: | ----------: | ----------------------------------------------------------------------------------------------------------------- |
-|   1 |          26 | [Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)         |
-|   2 |         136 | [Single Number](https://leetcode.com/problems/single-number/)                                                     |
-|   3 |         228 | [Summary Ranges](https://leetcode.com/problems/summary-ranges/)                                                   |
-|   4 |         268 | [Missing Number](https://leetcode.com/problems/missing-number/)                                                   |
-|   5 |        1295 | [Find Numbers with Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/) |
-|   6 |        1436 | [Destination City](https://leetcode.com/problems/destination-city/)                                               |
-|   7 |        2094 | [Finding 3-Digit Even Numbers](https://leetcode.com/problems/finding-3-digit-even-numbers/)                       |
-|   8 |        2562 | [Find the Array Concatenation Value](https://leetcode.com/problems/find-the-array-concatenation-value/)           |
-|   9 |        2682 | [Find the Losers of the Circular Game](https://leetcode.com/problems/find-the-losers-of-the-circular-game/)       |
-|  10 |        2873 | [Maximum Value of an Ordered Triplet I](https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/)     |
-|  11 |        3471 | [Find the Largest Almost Missing Integer](https://leetcode.com/problems/find-the-largest-almost-missing-integer/) |
-|  12 |        3502 | [Minimum Cost to Reach Every Position](https://leetcode.com/problems/minimum-cost-to-reach-every-position/)       |
-
+| # | LeetCode ID | Problem |
+| ---: | ---: | --- |
+| 1 | 54 | [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) |
+| 2 | 228 | [Summary Ranges](https://leetcode.com/problems/summary-ranges/) |
+| 3 | 283 | [Move Zeroes](https://leetcode.com/problems/move-zeroes/) |
+| 4 | 303 | [Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable/) |
+| 5 | 485 | [Max Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/) |
+| 6 | 495 | [Teemo Attacking](https://leetcode.com/problems/teemo-attacking/) |
+| 7 | 566 | [Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix/) |
+| 8 | 598 | [Range Addition II](https://leetcode.com/problems/range-addition-ii/) |
 <!-- ARRAY_QUESTIONS_END -->
 
 ## Iteration Templates

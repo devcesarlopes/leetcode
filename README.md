@@ -42,11 +42,11 @@ As categorias que quero praticar neste repositório são:
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Última atualização: 2026-04-13 06:36 UTC
+- Última atualização: 2026-04-13 23:07 UTC
 
 | Categoria | Quantidade resolvida |
 | --- | ---: |
-| Array | 31 |
+| Array | 32 |
 | String | 8 |
 | Tree | 0 |
 | Hash Table | 10 |
@@ -62,8 +62,8 @@ Este bloco é atualizado automaticamente com base no perfil público do LeetCode
 | Linked List | 1 |
 | Dynamic Programming | 1 |
 
-**Total resolvido:** 38 questões  
-**Por dificuldade:** Easy 37 · Medium 1 · Hard 0
+**Total resolvido:** 39 questões  
+**Por dificuldade:** Easy 37 · Medium 2 · Hard 0
 
 > Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
 <!-- LEETCODE_STATS_END -->
