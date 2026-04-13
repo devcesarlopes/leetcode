@@ -2,7 +2,7 @@
 
 This page is a practical guide for the most reusable Array-related patterns.
 
-## 1) Solved Array Questions (ordered 1 → n)
+## Solved Array Questions (ordered 1 → n)
 
 <!-- ARRAY_QUESTIONS_START -->
 
@@ -29,7 +29,81 @@ This block is auto-updated by `scripts/update_leetcode_stats.py`.
 
 <!-- ARRAY_QUESTIONS_END -->
 
-## 2) Question Templates & Iteration Templates
+## Iteration Templates
+
+### Pattern: Simple Iteration
+
+- Single pointer from `0` to `n-1`.
+
+```python
+for i in range(0, n):
+	# Do actions stack based on condition
+```
+
+![Simple iteration](assets/gifs/array-simple.gif)
+
+### Pattern: Two Pointers (nested scan)
+
+- First pointer `p1` moves from `0` to `n-1`.
+- Second pointer `p2` moves from `p1 + 1` to `n-1`.
+
+```python
+for p1 in range(0, n):
+	for p2 in range(p1 + 1, n):
+		# compare/use nums[p1], nums[p2]
+```
+
+![Two Pointers iteration](assets/gifs/array-two-pointers.gif)
+
+---
+
+### Pattern: Lazy pointer
+
+- One pointer scans from left to right.
+- One write pointer marks the next valid position.
+
+```python
+write = 1
+for read in range(1, n):
+	if condition:
+		write += 1
+```
+
+![Lazy pointer iteration](assets/gifs/array-lazy-pointer.gif)
+
+---
+
+### Pattern: Matrix traversal
+
+- Matrix scan (`m x n`):
+
+```python
+for i in range(0, m):
+	for j in range(0, n):
+		# process cell (i, j)
+```
+
+![Matrix traversal iteration](assets/gifs/array-matrix-traversal.gif)
+
+### Pattern: Matrix traversal + surrounding elements check
+
+- Matrix scan (`m x n`):
+- Surrounding-neighbors scan (for each cell):
+
+```python
+for i in range(0, m):
+	for j in range(0, n):
+
+        for di in [-1, 0, 1]:
+            for dj in [-1, 0, 1]:
+                ni, nj = i + di, j + dj
+                if 0 <= ni < m and 0 <= nj < n:
+                    # valid neighbor
+```
+
+![Matrix and neighbors iteration](assets/gifs/array-matrix-neighbors.gif)
+
+## 3) Question Templates
 
 ### Pattern: Two Pointers (nested scan)
 
@@ -43,19 +117,6 @@ class Solution:
 				if nums[i] + nums[j] == target:
 					return [i, j]
 ```
-
-**Iteration template:**
-
-- First pointer `p1` moves from `0` to `n-1`.
-- Second pointer `p2` moves from `p1 + 1` to `n-1`.
-
-```python
-for p1 in range(0, n):
-	for p2 in range(p1 + 1, n):
-		# compare/use nums[p1], nums[p2]
-```
-
----
 
 ### Pattern: Stack
 
@@ -79,17 +140,6 @@ class Solution:
 		return len(stack) == 0
 ```
 
-**Iteration template:**
-
-- Single pointer from `0` to `n-1`.
-
-```python
-for i in range(0, n):
-	# push/pop stack based on condition
-```
-
----
-
 ### Pattern: In-place Swap / In-place Write Pointer
 
 **Sample question:** 26. Remove Duplicates from Sorted Array
@@ -105,21 +155,6 @@ class Solution:
 		return k
 ```
 
-**Iteration template:**
-
-- One read pointer scans from left to right.
-- One write pointer marks the next valid position.
-
-```python
-write = 1
-for read in range(1, n):
-	if keep(nums[read], nums[write - 1]):
-		nums[read], nums[write] = nums[write], nums[read]
-		write += 1
-```
-
----
-
 ### Pattern: XOR to remove paired elements
 
 **Sample question:** 136. Single Number
@@ -132,18 +167,6 @@ class Solution:
 			x = x ^ nums[i]
 		return x
 ```
-
-**Iteration template:**
-
-- Single pointer from `0` to `n-1`.
-
-```python
-x = 0
-for i in range(0, n):
-	x ^= nums[i]
-```
-
----
 
 ### Pattern: Hash Table (dict) counting
 
@@ -163,23 +186,6 @@ class Solution:
 				return i
 		return -1
 ```
-
-**Iteration template:**
-
-- First pass: build counts.
-- Second pass: find first element that matches condition.
-
-```python
-count = {}
-for i in range(0, n):
-	count[nums[i]] = count.get(nums[i], 0) + 1
-
-for i in range(0, n):
-	if count[nums[i]] == 1:
-		return i
-```
-
----
 
 ### Pattern: Matrix traversal + surrounding elements check
 
@@ -204,28 +210,6 @@ class Solution:
 		return result
 ```
 
-**Iteration templates:**
-
-1. Matrix scan (`m x n`):
-
-```python
-for i in range(0, m):
-	for j in range(0, n):
-		# process cell (i, j)
-```
-
-2. Surrounding-neighbors scan (for each cell):
-
-```python
-for di in [-1, 0, 1]:
-	for dj in [-1, 0, 1]:
-		ni, nj = i + di, j + dj
-		if 0 <= ni < m and 0 <= nj < n:
-			# valid neighbor
-```
-
----
-
 ### Pattern: Iterate over unrepeated indices
 
 **Sample question:** 2094. Finding 3-Digit Even Numbers
@@ -247,39 +231,4 @@ class Solution:
 						nums.add(n)
 
 		return sorted(list(nums))
-```
-
-**Core rule:**
-
-- Use index-inequality checks to ensure each chosen index is unique in that candidate.
-
-For 3 indices:
-
-```python
-if i == j or i == k or j == k:
-	continue
-```
-
-General idea for **n unique indices**:
-
-```python
-# selected_indices is the list/set of indices already picked
-if current_index in selected_indices:
-	continue
-```
-
-Backtracking template for **n unique indices**:
-
-```python
-def build(selected_indices: list[int]):
-	if len(selected_indices) == n:
-		# evaluate candidate
-		return
-
-	for idx in range(0, L):
-		if idx in selected_indices:
-			continue
-		selected_indices.append(idx)
-		build(selected_indices)
-		selected_indices.pop()
 ```
