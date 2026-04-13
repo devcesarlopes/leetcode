@@ -107,7 +107,17 @@ for i in range(0, m):
 
 ### Pattern: Two Pointers (nested scan)
 
-**Sample question:** 1. Two Sum
+**Sample question:** [1. Two Sum](https://leetcode.com/problems/two-sum/)
+
+**Why this pattern fits:**
+
+- You must compare one element with the elements that come after it.
+- The brute-force version is naturally a nested scan over pairs of indices.
+- This makes the two-pointer nested iteration pattern the most direct way to describe the search space.
+
+**Why not another pattern:**
+
+- A simple single iteration is not enough, because one index alone cannot test all pairs.
 
 ```python
 class Solution:
@@ -120,7 +130,19 @@ class Solution:
 
 ### Pattern: Stack
 
-**Sample question:** 20. Valid Parentheses
+**Sample question:** [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+
+**Why this pattern fits:**
+
+- The problem depends on the most recent unmatched opening bracket.
+- That is exactly last-in, first-out behavior, which is what a stack gives you.
+- Every closing bracket must match the latest valid opening bracket still waiting to be closed.
+
+**Why not another pattern:**
+
+- A two-pointers scan would miss the nested structure of parentheses.
+- A lazy pointer is for in-place writing, not for matching open/close state.
+- A counting dictionary is not enough, because order matters, not just frequency.
 
 ```python
 class Solution:
@@ -142,7 +164,21 @@ class Solution:
 
 ### Pattern: In-place Swap / In-place Write Pointer
 
-**Sample question:** 26. Remove Duplicates from Sorted Array
+**Sample question:** [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+
+**Why this pattern fits:**
+
+- The array is sorted, so duplicates are grouped together.
+- You only need to keep the next valid unique value and place it at the next write position.
+- The problem explicitly requires the answer to be done in-place, so using a lazy pointer is a natural fit.
+- One pointer scans all values, and the write position only moves when the current value should remain in the compacted array.
+
+**Why not another pattern:**
+
+- A simple iteration alone can detect duplicates, but it does not solve the in-place rewrite requirement.
+- A stack adds unnecessary extra memory.
+- A hash table or a separate result array would make the problem easier, but they use extra space.
+- Since this question requires an in-place solution, the lazy pointer pattern is the right tradeoff.
 
 ```python
 class Solution:
@@ -157,7 +193,59 @@ class Solution:
 
 ### Pattern: XOR to remove paired elements
 
-**Sample question:** 136. Single Number
+**Sample question:** [136. Single Number](https://leetcode.com/problems/single-number/)
+
+**Why this pattern fits:**
+
+- Every duplicated number cancels itself with XOR.
+- After processing the whole array, only the unpaired number remains.
+- This gives a very compact linear solution with constant extra space.
+
+**Why not another pattern:**
+
+- A hash table can also solve it, but it uses extra memory.
+
+**Example math:**
+
+Input: `nums = [4, 1, 2, 1, 2]`
+
+We can group equal values because XOR is associative and duplicated values cancel out:
+
+$$
+	ext{result} = 0 \oplus 4 \oplus 1 \oplus 2 \oplus 1 \oplus 2
+$$
+
+$$
+	ext{result} = 0 \oplus (1 \oplus 1) \oplus (2 \oplus 2) \oplus 4
+$$
+
+$$
+	ext{result} = 0 \oplus 0 \oplus 0 \oplus 4
+$$
+
+$$
+	ext{result} = 4
+$$
+
+So the final answer is:
+
+$$
+4
+$$
+
+The reason this works is:
+
+$$
+a \oplus a = 0
+$$
+
+and
+
+$$
+a \oplus 0 = a
+$$
+
+So the paired values cancel each other, and only the unpaired value remains.
 
 ```python
 class Solution:
@@ -170,7 +258,19 @@ class Solution:
 
 ### Pattern: Hash Table (dict) counting
 
-**Sample question:** 387. First Unique Character in a String
+**Sample question:** [387. First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/)
+
+**Why this pattern fits:**
+
+- The problem asks for uniqueness, which depends on frequency.
+- A dictionary lets you count each character first and then scan again to find the first one with count `1`.
+- The pattern is naturally a two-pass frequency-count solution.
+
+**Why not another pattern:**
+
+- A stack does not help because there is no nested or last-in, first-out behavior.
+- Two pointers do not help because uniqueness is global, not based on comparing nearby elements.
+- XOR is not suitable because characters may appear more than twice and order still matters for the answer.
 
 ```python
 class Solution:
@@ -189,7 +289,19 @@ class Solution:
 
 ### Pattern: Matrix traversal + surrounding elements check
 
-**Sample question:** 661. Image Smoother
+**Sample question:** [661. Image Smoother](https://leetcode.com/problems/image-smoother/)
+
+**Why this pattern fits:**
+
+- You must visit every cell in the matrix.
+- For each cell, you must inspect the surrounding cells that are inside the grid bounds.
+- So this is not only matrix traversal, but matrix traversal plus neighbor validation.
+
+**Why not another pattern:**
+
+- A simple one-dimensional iteration does not describe the row/column structure.
+- Two pointers are not the right abstraction because the work is based on coordinates, not pair comparisons.
+- A lazy pointer is unrelated because the task is about local averaging, not in-place filtering.
 
 ```python
 class Solution:
@@ -212,7 +324,19 @@ class Solution:
 
 ### Pattern: Iterate over unrepeated indices
 
-**Sample question:** 2094. Finding 3-Digit Even Numbers
+**Sample question:** [2094. Finding 3-Digit Even Numbers](https://leetcode.com/problems/finding-3-digit-even-numbers/)
+
+**Why this pattern fits:**
+
+- You are building numbers by choosing multiple positions from the same array.
+- The key constraint is that the same index cannot be reused in the same candidate number.
+- So the main pattern is controlled enumeration over distinct indices.
+
+**Why not another pattern:**
+
+- A simple iteration cannot explore all 3-digit combinations.
+- A standard two-pointers pattern only covers pairs, not three distinct chosen positions.
+- A hash table is not the main idea here, because the hard part is generating valid index combinations.
 
 ```python
 class Solution:
