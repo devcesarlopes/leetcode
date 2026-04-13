@@ -10,6 +10,8 @@ from typing import Any, Dict, Iterable
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from arrays import update_arrays_doc
+
 README_PATH = Path(__file__).resolve().parents[1] / "README.md"
 LEETCODE_GRAPHQL_URL = "https://leetcode.com/graphql/"
 AUTO_START = "<!-- LEETCODE_STATS_START -->"
@@ -184,7 +186,7 @@ def extract_username(readme_text: str) -> str:
     raise ValueError("Não foi possível encontrar o usuário do LeetCode no README.")
 
 
-def graphql_request(query: str, variables: Dict[str, str], username: str) -> Dict[str, Any]:
+def graphql_request(query: str, variables: Dict[str, Any], username: str) -> Dict[str, Any]:
     payload = json.dumps({"query": query, "variables": variables}).encode("utf-8")
     request = Request(
         LEETCODE_GRAPHQL_URL,
@@ -350,6 +352,8 @@ def main() -> None:
     new_block = build_stats_block(username, submission_stats, tag_counts)
     updated_readme = replace_auto_block(readme_text, new_block)
     README_PATH.write_text(updated_readme + ("" if updated_readme.endswith("\n") else "\n"), encoding="utf-8")
+
+    update_arrays_doc(username=username, graphql_request=graphql_request)
 
 
 if __name__ == "__main__":
