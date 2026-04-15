@@ -36,36 +36,43 @@ As categorias que quero praticar neste repositório são:
 14. Linked List
 15. Dynamic Programming
 
+## Guias por categoria
+
+- [Arrays](Arrays.md)
+- [Linked List](LinkedList.md)
+
 ## Progresso por categoria
 
 <!-- LEETCODE_STATS_START -->
+
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
 - Última atualização: 2026-04-14 06:30 UTC
 
-| Categoria | Quantidade resolvida |
-| --- | ---: |
-| Array | 32 |
-| String | 8 |
-| Tree | 0 |
-| Hash Table | 10 |
-| Sorting | 2 |
-| Two Pointers | 6 |
-| Sliding Window | 0 |
-| BackTracking | 0 |
-| Prefix Sum | 0 |
-| Depth-First Search | 1 |
-| Binary Search | 1 |
-| Breadth-First Search | 1 |
-| Graph Theory | 0 |
-| Linked List | 1 |
-| Dynamic Programming | 1 |
+| Categoria            | Quantidade resolvida |
+| -------------------- | -------------------: |
+| Array                |                   32 |
+| String               |                    8 |
+| Tree                 |                    0 |
+| Hash Table           |                   10 |
+| Sorting              |                    2 |
+| Two Pointers         |                    6 |
+| Sliding Window       |                    0 |
+| BackTracking         |                    0 |
+| Prefix Sum           |                    0 |
+| Depth-First Search   |                    1 |
+| Binary Search        |                    1 |
+| Breadth-First Search |                    1 |
+| Graph Theory         |                    0 |
+| Linked List          |                    1 |
+| Dynamic Programming  |                    1 |
 
 **Total resolvido:** 39 questões  
 **Por dificuldade:** Easy 37 · Medium 2 · Hard 0
 
 > Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
+
 <!-- LEETCODE_STATS_END -->
 
 ## Melhor ordem de estudo para quem está começando
