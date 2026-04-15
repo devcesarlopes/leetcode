@@ -53,6 +53,21 @@ return dummy.next
 
 ![Linked list relinking](assets/gifs/linked-list-relink.gif)
 
+---
+
+### 3) Pattern: Remove an element by relinking pointers
+
+- If you want to remove the node after `head`, you can relink directly:
+
+```python
+head.next = head.next.next
+```
+
+- This skips one node in the chain.
+- Use this only when `head` and `head.next` exist.
+
+![Linked list remove node](assets/gifs/linked-list-remove-node.gif)
+
 ## Question Templates
 
 ### Pattern: Merge with relinking + tail pointer

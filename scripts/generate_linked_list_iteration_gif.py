@@ -151,10 +151,60 @@ def make_relink_gif() -> None:
     save_gif("linked-list-relink.gif", frames, duration=680)
 
 
+def make_remove_node_gif() -> None:
+    before = [1, 2, 3, 4]
+    after = [1, 3, 4]
+    frames: list[Image.Image] = []
+
+    img1, draw1 = canvas(
+        "Remove Node by Relinking",
+        "remove the node after head with: head.next = head.next.next",
+    )
+    centers_before = draw_linked_list(draw1, before, y=170, node_color=PURPLE, start_x=130, gap=170)
+    hx, hy = centers_before[0]
+    draw1.text((hx - 10, 96), "head", fill=GOOD, font=FONT)
+    draw1.text((hx + 8, 112), "v", fill=GOOD, font=FONT)
+
+    nx, ny = centers_before[1]
+    draw1.text((nx - 18, 232), "remove", fill=RED, font=FONT)
+    draw1.text((28, 322), "Before: 1 -> 2 -> 3 -> 4", fill=FG, font=FONT)
+    frames.append(img1)
+
+    img2, draw2 = canvas(
+        "Remove Node by Relinking",
+        "step: set head.next to the node after it",
+    )
+    centers2 = draw_linked_list(draw2, before, y=170, node_color=PURPLE, start_x=130, gap=170)
+    hx2, hy2 = centers2[0]
+    draw2.text((hx2 - 10, 96), "head", fill=GOOD, font=FONT)
+    draw2.text((hx2 + 8, 112), "v", fill=GOOD, font=FONT)
+
+    n1x, n1y = centers2[1]
+    n2x, n2y = centers2[2]
+    draw_arrow(draw2, hx2 + RADIUS, hy2 - 14, n2x - RADIUS, n2y - 14, color=ACCENT, width=3)
+    draw2.text((480, 126), "new link", fill=ACCENT, font=FONT)
+    draw2.text((28, 322), "Operation: head.next = head.next.next", fill=FG, font=FONT)
+    frames.append(img2)
+
+    img3, draw3 = canvas(
+        "Remove Node by Relinking",
+        "result after skipping one node",
+    )
+    centers_after = draw_linked_list(draw3, after, y=170, node_color=(64, 96, 145), start_x=130, gap=170)
+    hx3, hy3 = centers_after[0]
+    draw3.text((hx3 - 10, 96), "head", fill=GOOD, font=FONT)
+    draw3.text((hx3 + 8, 112), "v", fill=GOOD, font=FONT)
+    draw3.text((28, 322), "After: 1 -> 3 -> 4", fill=FG, font=FONT)
+    frames.append(img3)
+
+    save_gif("linked-list-remove-node.gif", frames, duration=820)
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     make_traversal_gif()
     make_relink_gif()
+    make_remove_node_gif()
     print("Done. Linked list GIFs generated.")
 
 
