@@ -112,3 +112,33 @@ class Solution:
 
 		return dummy.next
 ```
+
+### Pattern: Fast and Slow pointers to find cycles
+
+**Sample question:** [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+
+**Why this pattern fits:**
+
+- The `slow` pointer moves one node at a time.
+- The `fast` pointer moves two nodes at a time.
+- If there is a cycle, both pointers will eventually meet.
+- If `fast` reaches `None`, there is no cycle.
+
+```python
+class Solution:
+	def hasCycle(self, head: Optional[ListNode]) -> bool:
+		dummy = ListNode()
+		dummy.next = head
+		slow = fast = head
+
+		while fast and fast.next:
+			fast = fast.next.next
+			slow = slow.next
+
+			if slow == fast:
+				return True
+
+		return False
+```
+
+![Fast and slow pointers cycle detection](assets/gifs/linked-list-fast-slow-cycle.gif)

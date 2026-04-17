@@ -200,11 +200,65 @@ def make_remove_node_gif() -> None:
     save_gif("linked-list-remove-node.gif", frames, duration=820)
 
 
+def make_cycle_detection_gif() -> None:
+    values = [3, 2, 0, -4]
+    centers: list[tuple[int, int]] = []
+    start_x = 180
+    gap = 180
+    y = 190
+    cycle_to_index = 1
+
+    for i in range(len(values)):
+        centers.append((start_x + i * gap, y))
+
+    frames: list[Image.Image] = []
+    slow_steps = [0, 1, 2, 3, 1, 2]
+    fast_steps = [0, 2, 1, 3, 2, 1]
+
+    for step, (slow_i, fast_i) in enumerate(zip(slow_steps, fast_steps), start=1):
+        img, draw = canvas(
+            "Fast and Slow Pointers (Cycle Detection)",
+            "slow moves 1 step, fast moves 2 steps; if they meet, cycle exists",
+        )
+
+        for i, v in enumerate(values):
+            x, node_y = centers[i]
+            draw_node(draw, x, node_y, v, PURPLE)
+            if i > 0:
+                px, py = centers[i - 1]
+                draw_arrow(draw, px + RADIUS, py, x - RADIUS, node_y, color=FG, width=2)
+
+        last_x, last_y = centers[-1]
+        cycle_x, cycle_y = centers[cycle_to_index]
+        draw.line((last_x + RADIUS - 4, last_y, last_x + 95, last_y, last_x + 95, cycle_y - 70, cycle_x, cycle_y - 70, cycle_x, cycle_y - RADIUS - 2), fill=FG, width=2)
+        draw.polygon([(cycle_x, cycle_y - RADIUS - 2), (cycle_x - 6, cycle_y - RADIUS - 12), (cycle_x + 6, cycle_y - RADIUS - 12)], fill=FG)
+        draw.text((cycle_x - 26, cycle_y - 96), "cycle", fill=MUTED, font=FONT)
+
+        sx, sy = centers[slow_i]
+        fx, fy = centers[fast_i]
+        draw.text((sx - 14, sy + 52), "slow", fill=GOOD, font=FONT)
+        draw.text((sx + 10, sy + 68), "^", fill=GOOD, font=FONT)
+
+        draw.text((fx - 14, fy - 88), "fast", fill=ACCENT, font=FONT)
+        draw.text((fx + 10, fy - 72), "v", fill=ACCENT, font=FONT)
+
+        met = slow_i == fast_i
+        if met:
+            draw.text((28, 334), f"Step {step}: slow and fast meet at node {values[slow_i]} -> cycle detected", fill=GOOD, font=FONT)
+        else:
+            draw.text((28, 334), f"Step {step}: slow at {values[slow_i]}, fast at {values[fast_i]}", fill=FG, font=FONT)
+
+        frames.append(img)
+
+    save_gif("linked-list-fast-slow-cycle.gif", frames, duration=720)
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     make_traversal_gif()
     make_relink_gif()
     make_remove_node_gif()
+    make_cycle_detection_gif()
     print("Done. Linked list GIFs generated.")
 
 
