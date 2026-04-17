@@ -47,7 +47,7 @@ As categorias que quero praticar neste repositório são:
 Este bloco é atualizado automaticamente com base no perfil público do LeetCode.
 
 - Perfil monitorado: [leetcode.com/devcesarlopes](https://leetcode.com/devcesarlopes)
-- Última atualização: 2026-04-16 06:30 UTC
+- Última atualização: 2026-04-17 06:30 UTC
 
 | Categoria | Quantidade resolvida |
 | --- | ---: |
@@ -64,11 +64,11 @@ Este bloco é atualizado automaticamente com base no perfil público do LeetCode
 | Binary Search | 1 |
 | Breadth-First Search | 1 |
 | Graph Theory | 0 |
-| Linked List | 5 |
+| Linked List | 6 |
 | Dynamic Programming | 2 |
 
-**Total resolvido:** 44 questões  
-**Por dificuldade:** Easy 41 · Medium 3 · Hard 0
+**Total resolvido:** 45 questões  
+**Por dificuldade:** Easy 42 · Medium 3 · Hard 0
 
 > Observação: a soma por categoria pode ser maior que o total resolvido, porque uma mesma questão pode ter múltiplas tags no LeetCode.
 <!-- LEETCODE_STATS_END -->
